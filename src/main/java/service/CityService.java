@@ -16,11 +16,11 @@ public class CityService {
 
     public List<CityDto> findAll() {
         return cityDao.findALl().stream()
-                .map(city -> new CityDto(
-                        city.getId(),
-                        city.getCountryCode(),
-                        String.format("%s",
-                                city.getName())))
+                .map(city -> CityDto.builder()
+                        .id(city.getId())
+                        .countyCode(city.getCountryCode())
+                        .description(String.format("%s", city.getName()))
+                        .build())
                 .collect(Collectors.toList());
     }
 

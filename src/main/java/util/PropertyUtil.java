@@ -1,17 +1,16 @@
 package main.java.util;
 
+import lombok.experimental.UtilityClass;
 import main.java.exception.DaoException;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
-import java.util.zip.DataFormatException;
 
-public final class PropertyUtil {
+@UtilityClass
+public class PropertyUtil {
 
     private static final Properties PROPERTIES = new Properties();
-
-    private PropertyUtil() {}
 
     public static String getProperty(String key) {
         return PROPERTIES.getProperty(key);

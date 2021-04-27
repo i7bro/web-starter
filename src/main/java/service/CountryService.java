@@ -1,10 +1,10 @@
 package main.java.service;
 
+import lombok.Singular;
+import lombok.experimental.UtilityClass;
 import main.java.dao.CountryDao;
 import main.java.dto.CountryDto;
 import main.java.entity.Country;
-
-import java.util.List;
 
 public class CountryService {
 
@@ -12,15 +12,17 @@ public class CountryService {
 
     private final CountryDao countryDao = CountryDao.getInstance();
 
+    private CountryService() {}
+
     public CountryDto findById(String id) {
         Country country = countryDao.findById(id).orElse(null);
-        return new CountryDto(country.getCode(),
-                country.getName() + ", " +
+        return CountryDto.builder()
+                .code(country.getCode())
+                .description(
+                        country.getName() + ", " +
                         country.getContinent() + ", " +
-                        " population: " + country.getPopulation() + " peoples");
-    }
-
-    private CountryService() {
+                        " population: " + country.getPopulation() + " peoples")
+                .build();
     }
 
     public static CountryService getInstance() {
